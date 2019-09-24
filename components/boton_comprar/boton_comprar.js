@@ -1,12 +1,16 @@
 export class BotonComprar extends HTMLElement {
 
+    static get observedAttributes() {
+        return ['state'];
+    }
+
     get template() {
         return `
         <style>
             :host {
                 display: block;
                 margin: 1rem;
-                --color-boton: orange;
+                --color-boton: ${this.color};
                 --aire-boton: 1rem;
             }
             button {
@@ -19,15 +23,16 @@ export class BotonComprar extends HTMLElement {
               }
         </style>
         <div>
-            <button>Comprar Ahora</button>
+            <button><slot name="slot1">Comprar</slot></button>
         </div>
-        <p>Gracias por cofiar en nosotros</p>
+        <p><slot name="slot2">Gracias por cofiar en nosotros</slot></p>
         `
     }
 
     constructor() {
         super()
         console.log('Instanciado el boton')
+        this.color = 'gray'
     }
 
     connectedCallback() {
@@ -39,10 +44,25 @@ export class BotonComprar extends HTMLElement {
         this.btnComprar = this.shadow.querySelector('button')
         this.btnComprar.addEventListener('click', 
             this.onClick.bind(this))
+    }
+
+    // Defino una función callback para el
+    // instante del ciclo de vida "attributeCanged"
+
+    attributeChangedCallback (attr, oldVal, newVal) {
+        console.log('Cambiado ', attr, ' al valor: ', newVal);
+        if(newVal) {
+            this.color = 'orange'
+        } else {
+            this.color = 'gray'
+        }
+
     };
 
     onClick() {
-        console.log('Enviando datos')
+        if (this.color == 'orange' ) {
+            console.log('Enviando datos')
+        }
     }
 }
 
