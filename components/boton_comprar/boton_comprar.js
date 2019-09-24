@@ -38,7 +38,8 @@ export class BotonComprar extends HTMLElement {
     connectedCallback() {
         console.log('Renderizado el boton') 
 
-        this.shadow = this.attachShadow({mode: 'open'})
+        this.shadow = this.shadow ? this.shadow :
+            this.attachShadow({mode: 'open'})
         this.shadow.innerHTML = this.template
 
         this.btnComprar = this.shadow.querySelector('button')
@@ -56,12 +57,15 @@ export class BotonComprar extends HTMLElement {
         } else {
             this.color = 'gray'
         }
-
+        this.connectedCallback()
     };
 
     onClick() {
         if (this.color == 'orange' ) {
-            console.log('Enviando datos')
+            // this.getAttribute('id'))
+            this.dispatchEvent(
+                new CustomEvent('setOperacion', {detail: this.id})
+            )
         }
     }
 }

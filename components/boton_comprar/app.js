@@ -7,7 +7,10 @@ export class App {
 
         this.btnConnect.addEventListener('click', 
             this.onClickConnect.bind(this))
-        
+        this.aBotonesComprar.forEach(
+            item => item.addEventListener('setOperacion',
+                this.onOperacion.bind(this))
+        )
     }
 
     onClickConnect() {
@@ -24,5 +27,9 @@ export class App {
             this.btnConnect.innerHTML = 'Conectar'
         }
         console.log(this.isConeccted)
+    }
+
+    onOperacion(ev) {
+        console.log('Enviando datos', ev.detail)
     }
 }
