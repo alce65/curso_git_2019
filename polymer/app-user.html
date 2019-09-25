@@ -1,0 +1,72 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="app-user">
+  <template>
+    <style>
+      :host {
+        display: block;
+        margin: 1rem;
+        padding: 1rem;
+      }
+      input {
+        margin: 1rem;
+        border: none;
+        border-bottom: 1px solid gainsboro;
+        width: 100%;
+        background-color: inherit;
+      }
+    </style>
+    <!-- Desde aqui shadow DOM-->
+    <h2>[[titulo]]</h2>
+    <div>
+      <input type="text" placeholder="Nombre" 
+        value="{{userData.nombre::input}}"> 
+    </div>
+    <div>
+      <input type="text" placeholder="Apellido" 
+        value="{{userData.apellidos::input}}">
+    </div>
+    <p>
+      Hola [[userData.nombre]] [[userData.apellidos]], como estas?gi
+    </p>
+  </template>
+
+  <script>
+    /**
+     * `app-user`
+     * Prueba
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class AppUser extends Polymer.Element {
+   
+      static get is() { return 'app-user'; }
+      static get properties() {
+        return {
+          titulo: {
+            type: String,
+            value: 'Usuario' 
+          },
+          userData: {
+            type: Object,
+            value: function() {
+                return {
+                  nombre: '',
+                  apellidos: ''
+                }},
+            notify: true  
+            }
+          }; 
+      }
+      constructor() {
+        super()
+      }
+
+
+   
+    } // Fin de la clase
+    customElements.define(AppUser.is, AppUser);
+  </script>
+</dom-module>

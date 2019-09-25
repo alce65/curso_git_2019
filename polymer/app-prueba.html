@@ -1,0 +1,96 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="./bower_components/iron-icon/iron-icon.html">
+<link rel="import" href="./bower_components/iron-icons/maps-icons.html">
+<link rel="import" href="./app-user.html">
+
+<dom-module id="app-prueba">
+  <template>
+    <style>
+      :host {
+        display: block;
+        background-color: bisque;
+        margin: 1rem;
+        padding: 1rem;
+        border: 1px solid brown
+      }
+      iron-icon {
+        cursor: pointer;
+        --iron-icon-fill-color: brown;
+      }
+      :host([pressed]) iron-icon {
+        --iron-icon-fill-color: goldenrod;
+      }
+    </style>
+    <!-- Desde aqui shadow DOM-->
+    <h2>Saludos desde [[title]]!</h2>
+    <p>
+      <iron-icon icon="[[icono]]" on-click="onClick"></iron-icon>
+      [[mensaje]]
+    </p>
+    <div>
+      <app-user></app-user>
+    </div>
+    <p>Hecho con polymer</p>
+    <address>&copy; [[autor]] - [[fecha]]</address>
+  </template>
+
+  <script>
+    /**
+     * `app-prueba`
+     * Prueba
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class AppPrueba extends Polymer.Element {
+   
+      static get is() { return 'app-prueba'; }
+      static get properties() {
+        return {
+          autor: {
+            type: String,
+            value: 'Alejandro Cerezo'
+          },
+          title: {
+            type: String,
+            value: 'app-prueba'
+          },
+          icono: {
+            type: String,
+            value: 'maps:beenhere'
+          },
+          pressed: {
+            type: Boolean,
+            value: false,
+            reflectToAttribute: true,
+            notify: true
+          },
+          mensaje: {
+            type: String,
+            value: 'apagado'            
+          }
+         /*  fecha: {
+            type: String, 
+            value: ''
+          } */
+        }; 
+      }
+      constructor() {
+        super()
+        this.fecha = new Date().toLocaleDateString()
+        console.log('Pressed', this.pressed)
+      }
+      onClick(ev) {
+        this.pressed = !this.pressed
+        console.log('Pressed', this.pressed)
+        if (this.pressed) {
+          this.mensaje = 'encendido'
+        } else {
+          this.mensaje = 'apagado'
+        }
+      }   
+    } // Fin de la clase
+    customElements.define(AppPrueba.is, AppPrueba);
+  </script>
+</dom-module>
