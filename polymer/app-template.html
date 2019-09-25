@@ -1,0 +1,39 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="app-user">
+  <template>
+    <style>
+      :host {
+        display: block;
+        margin: 1rem;
+        padding: 1rem;
+      }
+    </style>
+    <!-- Desde aqui shadow DOM-->
+    <h2>....</h2>
+  </template>
+
+  <script>
+    /**
+     * `app-user`
+     * Prueba
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    class AppUser extends Polymer.Element {
+   
+      static get is() { return 'app-user'; }
+      static get properties() {
+        return {
+        }; 
+      }
+      constructor() {
+        super()
+      }
+   
+    } // Fin de la clase
+    customElements.define(AppUser.is, AppUser);
+  </script>
+</dom-module>
